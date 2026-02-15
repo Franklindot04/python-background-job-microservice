@@ -118,7 +118,13 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 python worker.py
 ```
 
-7. Use Terminal 3 for testing and editing
+### 7. Use Terminal 3 for testing and editing
+
+```bash
+curl -X POST http://localhost:8000/enqueue \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Franklin"}'
+```
    
 # 📡 API Endpoints
 
