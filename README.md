@@ -72,7 +72,7 @@ Clean, readable documentation
 
 ---
 
-# 🛠 Tech Stack
+## 🛠 Tech Stack
 
 | Component | Technology          |
 |----------|----------------------|
