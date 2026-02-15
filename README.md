@@ -153,7 +153,7 @@ Retrieve the final output of a completed job.
 }
 ```
 
-📸 Insert Screenshot #7 here  
+https://raw.githubusercontent.com/Franklindot04/python-background-job-microservice/main/Screenshot%207-2026-02-15%20at%2009.24.46.png
 *“Retrieving job results from Redis.”*
 
 # 🔄 Job Lifecycle (How It Works)
