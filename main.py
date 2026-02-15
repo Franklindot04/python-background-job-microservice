@@ -9,7 +9,7 @@ from rq import Queue
 from redis import Redis
 from tasks import process_job
 
-redis_conn = Redis()
+redis_conn = Redis(host="redis")
 queue = Queue('default', connection=redis_conn)
 
 @app.post("/enqueue")
