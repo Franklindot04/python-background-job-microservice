@@ -1,31 +1,42 @@
 # 🚀 Python Background Job Microservice (FastAPI + Redis + RQ)
 
-A lightweight, production‑style microservice that processes background jobs using **FastAPI**, **Redis**, and **RQ**.  
-This project demonstrates real‑world DevOps skills, including:
+A production‑style microservice that processes background jobs using **FastAPI**, **Redis**, and **RQ**.  
+This project mirrors real systems used in modern backend and DevOps environments for:
 
-- API design  
-- Background job queues  
-- Worker processes  
-- Multi‑terminal architecture  
-- Linux + AWS EC2 deployment  
-- Clean documentation and reproducible workflows  
+- Email sending  
+- Report generation  
+- Data processing  
+- Long‑running workflows  
+- Asynchronous microservices  
 
-This is the kind of system used in real companies for email sending, report generation, data processing, and asynchronous workflows.
+It demonstrates practical engineering skills across API design, distributed systems, Linux, AWS, and clean documentation.
 
 ---
 
-# 🧱 Architecture Overview
+## 🎯 Why This Project Matters
 
-This microservice follows a clean, decoupled architecture:
+This microservice shows that I can:
 
-```
+- Design and document real APIs  
+- Build asynchronous job pipelines  
+- Work with queues, workers, and Redis  
+- Debug multi‑terminal systems on Linux  
+- Deploy and operate services on AWS EC2  
+- Write clear, recruiter‑friendly documentation  
+
+This is the kind of architecture used in real production systems.
+
+---
+
+## 🧱 Architecture Overview
+
+```text
 ┌──────────────────────────┐        ┌──────────────────────────┐
 │        FastAPI API       │        │        RQ Worker         │
 │  - /enqueue              │        │  - Listens to Redis      │
 │  - /status/{job_id}      │ <----> │  - Executes jobs         │
-│  - /result/{job_id}      │        │  - Returns results       │
+│  - /result/{job_id}      │        │  - Stores results        │
 └─────────────┬────────────┘        └─────────────┬────────────┘
-              │                                     │
               │                                     │
               ▼                                     ▼
         ┌──────────────────────────────────────────────────┐
@@ -34,7 +45,7 @@ This microservice follows a clean, decoupled architecture:
         │  - Tracks job state                               │
         │  - Holds results (TTL: 500 seconds)               │
         └──────────────────────────────────────────────────┘
-```
+
 
 
 This architecture mirrors real production systems used in modern microservices.
@@ -42,15 +53,23 @@ This architecture mirrors real production systems used in modern microservices.
 ---
 
 # ✨ Features
+Submit background jobs via REST API
 
-- Submit background jobs via REST API  
-- Track job status (queued, started, finished, failed)  
-- Retrieve job results  
-- Redis‑backed queue  
-- RQ worker process  
-- FastAPI Swagger UI  
-- Multi‑terminal workflow (API, worker, free terminal)  
-- AWS EC2 deployment  
+Track job status (queued → started → finished)
+
+Retrieve job results
+
+Redis‑backed queue
+
+RQ worker process
+
+FastAPI Swagger UI
+
+Multi‑terminal workflow (API, worker, testing)
+
+AWS EC2 deployment
+
+Clean, readable documentation 
 
 ---
 
