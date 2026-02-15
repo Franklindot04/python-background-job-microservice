@@ -47,7 +47,6 @@ This is the kind of architecture used in real production systems.
         └──────────────────────────────────────────────────┘
 
 
-
 This architecture mirrors real production systems used in modern microservices.
 
 ---
