@@ -152,8 +152,7 @@ Retrieve the final output of a completed job.
   }
 }
 ```
-
-https://raw.githubusercontent.com/Franklindot04/python-background-job-microservice/main/Screenshot%207-2026-02-15%20at%2009.24.46.png
+![Screenshot #7](https://raw.githubusercontent.com/Franklindot04/python-background-job-microservice/main/Screenshot%207-2026-02-15%20at%2009.24.46.png)
 *“Retrieving job results from Redis.”*
 
 # 🔄 Job Lifecycle (How It Works)
@@ -186,7 +185,7 @@ Background job systems in production
 
 # 🖼 Worker Logs
 
-![Screenshot #7](https://raw.githubusercontent.com/Franklindot04/python-background-job-microservice/main/Screenshot%207-2026-02-15%20at%2009.24.46.png)
+![Screenshot #5](https://raw.githubusercontent.com/Franklindot04/python-background-job-microservice/main/Screenshot%205-%202026-02-15%20at%2008.53.03.png)
 “Worker receiving and processing a job.”
 
 This screenshot proves:
