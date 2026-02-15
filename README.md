@@ -1,261 +1,293 @@
-# 🚀 Python Background Job Microservice (FastAPI + Redis + RQ)
+# Python Background Job Microservice (FastAPI, Redis, Docker)
 
-A production‑style microservice that processes background jobs using **FastAPI**, **Redis**, and **RQ**.  
-This project mirrors real systems used in modern backend and DevOps environments for:
+A small but production-style background job processing system built with **FastAPI**, **Redis**, **RQ**, and **Docker Compose**.
 
-- Email sending  
-- Report generation  
-- Data processing  
-- Long‑running workflows  
-- Asynchronous microservices  
+It exposes a simple HTTP API where clients can enqueue jobs, check their status, and retrieve results—while the actual work is processed asynchronously by a background worker.
 
-It demonstrates practical engineering skills across API design, distributed systems, Linux, AWS, and clean documentation.
+## 1. Overview
 
----
-
-## 🎯 Why This Project Matters
-
-This microservice shows that I can:
-
-- Design and document real APIs  
-- Build asynchronous job pipelines  
-- Work with queues, workers, and Redis  
-- Debug multi‑terminal systems on Linux  
-- Deploy and operate services on AWS EC2  
-- Write clear, recruiter‑friendly documentation  
-
-This is the kind of architecture used in real production systems.
+This project is a Dockerized Python microservice system designed to demonstrate real-world DevOps practices.  
+It includes an API built with FastAPI, a background worker for asynchronous processing, and Redis as the message broker.  
+The goal is to showcase containerization, service orchestration, logging, troubleshooting, and production‑ready architecture.
 
 ---
 
-## 🧱 Architecture Overview
+## 2. Architecture
+
+High-level architecture:
 
 ```text
-┌──────────────────────────┐        ┌──────────────────────────┐
-│        FastAPI API       │        │        RQ Worker         │
-│  - /enqueue              │        │  - Listens to Redis      │
-│  - /status/{job_id}      │ <----> │  - Executes jobs         │
-│  - /result/{job_id}      │        │  - Stores results        │
-└─────────────┬────────────┘        └─────────────┬────────────┘
-              │                                     │
-              ▼                                     ▼
-        ┌──────────────────────────────────────────────────┐
-        │                     Redis Queue                   │
-        │  - Stores jobs                                    │
-        │  - Tracks job state                               │
-        │  - Holds results (TTL: 500 seconds)               │
-        └──────────────────────────────────────────────────┘
+Client (Swagger UI / HTTP)
+            |
+            v
+      FastAPI container (bg-api)
+            |
+            v
+      Redis container (redis)
+            |
+            v
+      Worker container (bg-worker)
+            |
+            v
+      Job processed + result stored
 ```
+---
+## 3. Why This Project Matters
 
-This architecture mirrors real production systems used in modern microservices.
+**Goal:** Demonstrate how a DevOps engineer designs and runs a small, realistic microservice with:
+
+- **FastAPI** as the HTTP API
+- **Redis** as a message broker / job queue
+- **RQ worker** for background processing
+- **Docker & Docker Compose** for containerized orchestration
+- **AWS EC2** as the runtime environment
+
+This project is intentionally small in scope but structured like a real-world service: separate components, clear responsibilities, and observable behavior through logs and HTTP endpoints.
 
 ---
+## 4. Running the Microservice with Docker Compose
 
-## ✨ Features
+This project is fully containerized using **Docker** and **Docker Compose**. 
+All components (API, Redis, Worker) start together with a single command.
 
-- Submit background jobs via REST API  
-- Track job status (queued → started → finished)  
-- Retrieve job results  
-- Redis‑backed queue  
-- RQ worker process  
-- FastAPI Swagger UI  
-- Multi‑terminal workflow (API, worker, testing)  
-- AWS EC2 deployment  
-- Clean, readable documentation  
+### 4.1 Start the entire system
 
+```bash
+docker compose up --build
+```
+
+This will:
+
+- Build the API image
+- Build the Worker image
+- Start Redis
+- Start all containers
+- Attach logs from all services into one terminal
+
+You should see output similar to:
+
+```
+Attaching to bg-api, bg-worker, redis
+redis      | Ready to accept connections
+bg-api     | Uvicorn running on http://0.0.0.0:8000
+bg-worker  | Listening on default...
+```
+### 4.2 Stop everything
+
+Press CTRL + C, then run:
+
+```bash
+docker compose down
+```
+
+#### 4.3 Access the API
+
+Open:
+
+```bash
+http://<your-ec2-ip>:8000/docs
+```
+This gives you the interactive Swagger UI where you can:
+
+- Submit jobs
+- Check job status
+- Retrieve results
+
+ ### 4.4 Submit a Job (Example)
+
+Send a POST request to:
+
+```bash
+curl -X POST "http://<your-ec2-ip>:8000/jobs" \
+     -H "Content-Type: application/json" \
+     -d '{"text": "hello world"}'
+```
+
+You will receive a JSON response containing a job_id.
+
+### 4.5 Check Job Status
+
+Use the job_id you received earlier:
+
+```bash
+curl "http://<your-ec2-ip>:8000/jobs/<job_id>"
+```
+Possible statuses include:
+
+- queued — the worker has not picked it up yet
+
+- in_progress — the worker is processing it
+
+- completed — the result is ready
+
+- failed — something went wrong during processing
 ---
 
-## 🛠 Tech Stack
+### 4.6 Retrieve Results
 
-| Component | Technology              |
-|----------|--------------------------|
-| API      | FastAPI + Uvicorn       |
-| Queue    | Redis                    |
-| Worker   | RQ (Redis Queue)        |
-| Language | Python 3                 |
-| Hosting  | AWS EC2 (Amazon Linux)   |
-| OS       | Linux                    |
-| Tools    | nano, systemctl, pip, venv |
-
----
-
-
-# 📦 Installation & Setup
-
-### 1. Clone the repository
+Once the job status is **completed**, fetch the result:
 
 ```bash
-git clone <your-repo-url>
-cd python-microservice
+curl "http://<your-ec2-ip>:8000/jobs/<job_id>/result"
 ```
-### 2. Create and activate a virtual environment
+If the job succeeded, you will receive the processed output.
+If it failed, you will receive an error message.
+
+### 5. Environment Variables
+
+These variables control how your API and worker behave.  
+Create a `.env` file in the project root and add:
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+REDIS_HOST=redis
+REDIS_PORT=6379
+API_PORT=8000
+```
+Make sure the .env file is in the same directory as your docker-compose.yml.
+
+### 6. Project Structure
+
+Your repository should look like this:
+
+
+``` 
+project/
+├── api/
+│   ├── main.py
+│   ├── worker.py
+│   └── requirements.txt
+├── docker-compose.yml
+├── Dockerfile.api
+├── Dockerfile.worker
+├── .env
+└── README.md
 ```
 
-### 3. Install dependencies
+### 7. Docker Architecture Overview
+This is how the services communicate inside Docker:
+```
+API ---> Redis ---> Worker
+ |                     ^
+ |_____________________|
+
+```
+The API pushes jobs to Redis, and the worker pulls and processes them.
+
+### 8. Stopping the Services
+
+To stop all running containers, press:
+
+CTRL + C
+
+Then remove the containers (but keep the images) with:
 
 ```bash
-pip install fastapi uvicorn redis rq
+docker-compose down
 ```
 
-### 4. Start Redis (if running locally)
+### 9. Viewing Logs
+
+To see the logs for all running services, use:
 
 ```bash
-redis-server
+docker-compose logs -f
 ```
-### 5. Start the API (Terminal 1)
+To view logs for a specific service (for example, the API), run:
 
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
+docker-compose logs -f api
 ```
 
-### 6. Start the worker (Terminal 2)
+### 10. Testing the API
+
+Once the containers are running, you can test the API using:
 
 ```bash
-python worker.py
+curl http://localhost:8000/
 ```
-
-### 7. Use Terminal 3 for testing and editing
+To send a job to the worker through the API, run:
 
 ```bash
-curl -X POST http://localhost:8000/enqueue \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Franklin"}'
-```
-   
-# 📡 API Endpoints
-
-## **POST /enqueue**
-
-Submit a background job.
-
-**Request:**
-```json
-{"name": "Franklin"}
+curl -X POST http://localhost:8000/process
 ```
 
-**Response:**
-```json
-{"job_id": "<uuid>"}
+### 11. Troubleshooting
+
+**1. Port already in use (API fails to start)**  
+
+If you see an error about port 8000 being in use, find the process with:
+
+```bash
+lsof -i :8000
+```
+Then stop it:
+```bash
+kill -9 <PID>
 ```
 
-![Screenshot #4](https://raw.githubusercontent.com/Franklindot04/python-background-job-microservice/main/Screenshot%204-%202026-02-15%20at%2010.39.51.png)
-*“Enqueueing a job via FastAPI Swagger UI.”*
+**2. Redis connection errors**
 
----
+Make sure the Redis container is running:
 
-## **GET /status/{job_id}**
-
-Check the status of a job.
-
-**Response:**
-```json
-{
-  "job_id": "<uuid>",
-  "status": "finished"
-}
+```bash
+docker-compose ps
 ```
+You should see a container named redis with status “Up”.
 
-![Screenshot #6](https://raw.githubusercontent.com/Franklindot04/python-background-job-microservice/main/Screenshot%206-%202026-02-15%20at%2009.15.25.png)
-*“Checking job status using the /status endpoint.”*
+**3. Code changes not applying** 
 
----
+If you modify Python files but the container doesn’t update:
 
-## **GET /result/{job_id}**
-
-Retrieve the final output of a completed job.
-
-**Response:**
-```json
-{
-  "job_id": "<uuid>",
-  "result": {
-    "status": "done",
-    "input": {"name": "Franklin"}
-  }
-}
+```bash
+docker-compose up --build
 ```
-![Screenshot #7](https://raw.githubusercontent.com/Franklindot04/python-background-job-microservice/main/Screenshot%207-2026-02-15%20at%2009.24.46.png)
-*“Retrieving job results from Redis.”*
+This forces Docker to rebuild the images.
 
-# 🔄 Job Lifecycle (How It Works)
+**4. Worker not processing jobs**
+  
+Check worker logs:
 
-Client sends a job to /enqueue
+```bash
+docker-compose logs -f worker
+```
+If it’s running but idle, the API may not be sending jobs correctly.
 
-FastAPI pushes the job into Redis
+### 12. Tech Stack
 
-Redis assigns a job ID
+**Backend**
+- Python (FastAPI)
+- Redis (message broker)
+- Worker service (background job processor)
 
-RQ Worker (Terminal 2) picks up the job
+**Containerization**
+- Docker
+- Docker Compose
 
-Worker executes process_job()
+**Infrastructure & DevOps**
+- Linux environment
+- CI/CD‑ready project structure
+- Isolated multi‑service architecture
 
-Worker stores the result in Redis
+**Networking**
+- Internal Docker networks
+- Port mapping for API access
 
-Client checks /status/{job_id}
+### 13. Future Improvements
 
-Client retrieves output via /result/{job_id}
+- Add Docker health checks for API, Redis, and Worker
+- Implement retry logic and dead‑letter queues for failed jobs
+- Add unit tests and integration tests for API and Worker
+- Introduce environment‑specific Compose files (dev / prod)
+- Add monitoring (Prometheus + Grafana) for container metrics
+- Migrate to a message queue like RabbitMQ or AWS SQS for scaling
+- Add CI/CD pipeline to automate builds and deployments
 
-This is the same pattern used by:
+### 14. Project Summary
 
-Celery
+This project demonstrates a clean, production‑inspired microservice architecture using Docker and Python.  
+It includes an API service built with FastAPI, a background worker for asynchronous job processing, and Redis as the message broker.  
+All services run in isolated containers using Docker Compose, making the system easy to start, stop, and extend.
 
-Sidekiq
-
-AWS SQS workers
-
-Background job systems in production
-
-# 🖼 Worker Logs
-
-![Screenshot #5](https://raw.githubusercontent.com/Franklindot04/python-background-job-microservice/main/Screenshot%205-%202026-02-15%20at%2008.53.03.png)
-“Worker receiving and processing a job.”
-
-This screenshot proves:
-
-Redis is connected
-
-Worker is alive
-
-Job executed successfully
-
-# 🏁 Final Result
-
-You now have a fully functional microservice with:
-
-Background processing
-
-Job tracking
-
-Job result retrieval
-
-Redis queue
-
-RQ worker
-
-FastAPI API
-
-Clean documentation
-
-Real AWS deployment
-
-This is a portfolio‑quality project that demonstrates real DevOps engineering skills.
-
-# 🚀 Future Improvements
-
-Add Docker + Docker Compose
-
-Add authentication
-
-Add retry logic for failed jobs
-
-Add monitoring (Flower, Prometheus, Grafana)
-
-Add persistent result storage (PostgreSQL)
-
-Deploy with CI/CD pipeline
-
----
+The project highlights practical DevOps skills such as containerization, service orchestration, logging, troubleshooting, and environment‑ready structure.  
+It serves as a strong foundation for scaling into more advanced distributed systems or integrating CI/CD pipelines.
+  
