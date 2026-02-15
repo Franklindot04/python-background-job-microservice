@@ -106,12 +106,20 @@ pip install fastapi uvicorn redis rq
 ```bash
 redis-server
 ```
+### 5. Start the API (Terminal 1)
 
-5. Start the API (Terminal 1)
+```bash
 uvicorn main:app --host 0.0.0.0 --port 8000
-6. Start the worker (Terminal 2)
+```
+
+### 6. Start the worker (Terminal 2)
+
+```bash
 python worker.py
+```
+
 7. Use Terminal 3 for testing and editing
+   
 # 📡 API Endpoints
 
 ## **POST /enqueue**
