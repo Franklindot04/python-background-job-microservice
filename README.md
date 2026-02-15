@@ -156,7 +156,8 @@ Retrieve the final output of a completed job.
 📸 Insert Screenshot #7 here  
 *“Retrieving job results from Redis.”*
 
-🔄 Job Lifecycle (How It Works)
+# 🔄 Job Lifecycle (How It Works)
+
 Client sends a job to /enqueue
 
 FastAPI pushes the job into Redis
@@ -183,7 +184,8 @@ AWS SQS workers
 
 Background job systems in production
 
-🖼 Worker Logs
+# 🖼 Worker Logs
+
 📸 Insert Screenshot #5 here
 “Worker receiving and processing a job.”
 
@@ -195,7 +197,8 @@ Worker is alive
 
 Job executed successfully
 
-🏁 Final Result
+# 🏁 Final Result
+
 You now have a fully functional microservice with:
 
 Background processing
@@ -216,7 +219,8 @@ Real AWS deployment
 
 This is a portfolio‑quality project that demonstrates real DevOps engineering skills.
 
-🚀 Future Improvements
+# 🚀 Future Improvements
+
 Add Docker + Docker Compose
 
 Add authentication
