@@ -116,7 +116,7 @@ Submit a background job.
 {"job_id": "<uuid>"}
 ```
 
-📸 Insert Screenshot #4 here  
+![Screenshot #4](https://raw.githubusercontent.com/Franklindot04/python-background-job-microservice/main/Screenshot%204-%202026-02-15%20at%2010.39.51.png)
 *“Enqueueing a job via FastAPI Swagger UI.”*
 
 ---
