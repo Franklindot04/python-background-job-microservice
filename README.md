@@ -1,5 +1,12 @@
 # Python Background Job Microservice (FastAPI, Redis, Docker)
 
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-API%20Framework-009688)
+![Redis](https://img.shields.io/badge/Redis-Message%20Broker-red)
+![RQ](https://img.shields.io/badge/RQ-Worker%20Queue-orange)
+![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
+![Compose](https://img.shields.io/badge/Docker%20Compose-Orchestration-2496ED)
+
 A small but production-style background job processing system built with **FastAPI**, **Redis**, **RQ**, and **Docker Compose**.
 
 It exposes a simple HTTP API where clients can enqueue jobs, check their status, and retrieve results—while the actual work is processed asynchronously by a background worker.
