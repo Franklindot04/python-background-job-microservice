@@ -133,7 +133,7 @@ Check the status of a job.
 }
 ```
 
-📸 Insert Screenshot #6 here  
+![Screenshot #6](https://raw.githubusercontent.com/Franklindot04/python-background-job-microservice/main/Screenshot%206-%202026-02-15%20at%2009.15.25.png)
 *“Checking job status using the /status endpoint.”*
 
 ---
