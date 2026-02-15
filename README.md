@@ -186,7 +186,7 @@ Background job systems in production
 
 # 🖼 Worker Logs
 
-📸 Insert Screenshot #5 here
+![Screenshot #5](https://raw.githubusercontent.com/Franklindot04/python-background-job-microservice/main/Screenshot%205-%202026-02-15%20at%2008.53.03.png)
 “Worker receiving and processing a job.”
 
 This screenshot proves:
