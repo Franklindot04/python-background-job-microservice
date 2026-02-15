@@ -74,15 +74,16 @@ Clean, readable documentation
 
 # 🛠 Tech Stack
 
-| Component | Technology |
-|----------|------------|
-| API | FastAPI + Uvicorn |
-| Queue | Redis |
-| Worker | RQ (Redis Queue) |
-| Language | Python 3 |
-| Hosting | AWS EC2 (Amazon Linux) |
-| OS | Linux |
-| Tools | nano, systemctl, pip, venv |
+| Component | Technology          |
+|----------|----------------------|
+| API      | FastAPI + Uvicorn   |
+| Queue    | Redis                |
+| Worker   | RQ (Redis Queue)     |
+| Language | Python 3             |
+| Hosting  | AWS EC2 (Amazon Linux) |
+| OS       | Linux                |
+| Tools    | nano, systemctl, pip, venv |
+
 
 ---
 
