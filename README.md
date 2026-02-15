@@ -45,30 +45,23 @@ This is the kind of architecture used in real production systems.
         │  - Tracks job state                               │
         │  - Holds results (TTL: 500 seconds)               │
         └──────────────────────────────────────────────────┘
-
+```
 
 This architecture mirrors real production systems used in modern microservices.
 
 ---
 
-# ✨ Features
-Submit background jobs via REST API
+## ✨ Features
 
-Track job status (queued → started → finished)
-
-Retrieve job results
-
-Redis‑backed queue
-
-RQ worker process
-
-FastAPI Swagger UI
-
-Multi‑terminal workflow (API, worker, testing)
-
-AWS EC2 deployment
-
-Clean, readable documentation 
+- Submit background jobs via REST API  
+- Track job status (queued → started → finished)  
+- Retrieve job results  
+- Redis‑backed queue  
+- RQ worker process  
+- FastAPI Swagger UI  
+- Multi‑terminal workflow (API, worker, testing)  
+- AWS EC2 deployment  
+- Clean, readable documentation  
 
 ---
 
@@ -84,8 +77,8 @@ Clean, readable documentation
 | OS       | Linux                    |
 | Tools    | nano, systemctl, pip, venv |
 
-
 ---
+
 
 # 📦 Installation & Setup
 
