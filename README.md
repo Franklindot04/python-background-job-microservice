@@ -296,5 +296,5 @@ It includes an API service built with FastAPI, a background worker for asynchron
 All services run in isolated containers using Docker Compose, making the system easy to start, stop, and extend.
 
 The project highlights practical DevOps skills such as containerization, service orchestration, logging, troubleshooting, and environment‑ready structure.  
-It serves as a strong foundation for scaling into more advanced distributed systems or integrating CI/CD pipelines.
+It serves as a strong foundation for scaling into more advanced distributed systems or integrating CI/CD pipelines...
   
