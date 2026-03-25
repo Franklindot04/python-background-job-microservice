@@ -49,7 +49,7 @@ Client (Swagger UI / HTTP)
 - **Docker & Docker Compose** for containerized orchestration
 - **AWS EC2** as the runtime environment
 
-This project is intentionally small in scope but structured like a real-world service: separate components, clear responsibilities, and observable behavior through logs and HTTP endpoints.
+This project is intentionally small in scope but structured like a real-world service: separate components, clear responsibilities and observable behavior through logs and HTTP endpoints.
 
 ---
 ## 4. Running the Microservice with Docker Compose
