@@ -9,7 +9,7 @@
 
 A small but production-style background job processing system built with **FastAPI**, **Redis**, **RQ**, and **Docker Compose**.
 
-It exposes a simple HTTP API where clients can enqueue jobs, check their status and retrieve results—while the actual work is processed asynchronously by a background worker.
+It exposes a simple HTTP API where clients can enqueue jobs, check their status and retrieve results,while the actual work is processed asynchronously by a background worker.
 
 ## 1. Overview
 
