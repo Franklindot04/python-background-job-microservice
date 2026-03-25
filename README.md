@@ -15,7 +15,7 @@ It exposes a simple HTTP API where clients can enqueue jobs, check their status 
 
 This project is a Dockerized Python microservice system designed to demonstrate real-world DevOps practices.  
 It includes an API built with FastAPI, a background worker for asynchronous processing and Redis as the message broker.  
-The goal is to showcase containerization, service orchestration, logging, troubleshooting, and production‑ready architecture.
+The goal is to showcase containerization, service orchestration, logging, troubleshooting and production‑ready architecture.
 
 ---
 
