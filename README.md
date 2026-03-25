@@ -293,8 +293,8 @@ If it’s running but idle, the API may not be sending jobs correctly.
 
 This project demonstrates a clean, production‑inspired microservice architecture using Docker and Python.  
 It includes an API service built with FastAPI, a background worker for asynchronous job processing, and Redis as the message broker.  
-All services run in isolated containers using Docker Compose, making the system easy to start, stop, and extend.
+All services run in isolated containers using Docker Compose, making the system easy to start, stop and extend.
 
-The project highlights practical DevOps skills such as containerization, service orchestration, logging, troubleshooting, and environment‑ready structure.  
+The project highlights practical DevOps skills such as containerization, service orchestration, logging, troubleshooting and environment‑ready structure.  
 It serves as a strong foundation for scaling into more advanced distributed systems or integrating CI/CD pipelines.
   
