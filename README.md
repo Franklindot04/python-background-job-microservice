@@ -178,7 +178,7 @@ API ---> Redis ---> Worker
  |_____________________|
 
 ```
-The API pushes jobs to Redis, and the worker pulls and processes them.
+The API pushes jobs to Redis and the worker pulls and processes them.
 
 ### 8. Stopping the Services
 
