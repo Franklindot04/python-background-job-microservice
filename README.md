@@ -7,7 +7,7 @@
 ![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
 ![Compose](https://img.shields.io/badge/Docker%20Compose-Orchestration-2496ED)
 
-A small but production-style background job processing system built with **FastAPI**, **Redis**, **RQ**, and **Docker Compose**.
+A small but production-style background job processing system built with **FastAPI**, **Redis**, **RQ** and **Docker Compose**.
 
 It exposes a simple HTTP API where clients can enqueue jobs, check their status and retrieve results,while the actual work is processed asynchronously by a background worker.
 
